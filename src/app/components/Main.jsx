@@ -17,7 +17,7 @@ export const Main = ()=>(
         <div>
             <Navigation/>
             <Switch>
-                <Route exact path='/Users'><Users userInformation={defaultState}/></Route>
+                <Route exact path='/Users'><Users/></Route>
                 <Route exact path='/NewUser'><NewUser/></Route>
                 <Route exact path='/Projects'><Projects projectInformation={defaultState}/></Route>
                 <Route exact path='/NewProject'><NewProject projectInformation={defaultState}/></Route>
