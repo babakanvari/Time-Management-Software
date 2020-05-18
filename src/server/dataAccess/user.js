@@ -1,43 +1,47 @@
-import { connectDB, disConnectDB, databaseInfo } from '../db_connection';
-import * as user from '../entities/user';
+import UserModel from './models/user';
+import { connectdb, disConnectdb } from './database';
+import { User } from '../entities/user';
 
-//Add new user
-export const addUser = async newUser => {
-    let db = await connectDB();
-    let collection = db.collection(`users`);
-    await collection.insertOne(newUser);
-    console.log('Data Successfully Added');
-};
+//Create new user
+const create = async userInfo => {
+  connectdb();
+  let user = new UserModel(userInfo);
+  await user.save();
+  disConnectdb();
 
-//Find user by ID
-export const findProfile = async id => {
-    let db = await connectDB();
-    let userInfo = await db.collection('users').findOne({ 'id': id });
-    console.log(userInfo);
-    if (!userInfo) {
-        return null;
-    }
-    else {
-        let userProfile = new user.Profile(userInfo);
-        return userProfile;
-    }
-};
+  return user;
+}
 
-//Update user by ID
-const updateUser = async (userID, updatedInfo) => {
-    let { id, name, role, employedSince } = updatedInfo;
-    let db = await connectDB();
-    await db.collection('users').updateOne(
-        { 'id': userID },
-        {
-            $set:
-            {
-                id: id,
-                name: name,
-                role: role,
-                employedSince: employedSince
-            }
-        }
-    );
-    console.log('Data successfully update')
-};
+//Find User information by email.
+const findByEmail = async userEmail => {
+  connectdb();
+  let userinfo = await UserModel.findOne({ email: userEmail });
+  let user = new User(userinfo);
+  disConnectdb();
+
+  return user;
+}
+
+//Update user by ID and return updated information
+const update = async userInfo => {
+  connectdb();
+  let user = await UserModel.findByIdAndUpdate(
+    { _id: userInfo._id },
+    {
+      firstName: userInfo.firstName,
+      lastName: userInfo.lastName,
+      currentPosition: userInfo.currentPosition,
+      employmentDate: userInfo.employmentDate,
+    },
+    { new: true }
+  )
+  disConnectdb();
+  
+  return user;
+}
+
+module.exports = {
+  create,
+  findByEmail,
+  update
+}
