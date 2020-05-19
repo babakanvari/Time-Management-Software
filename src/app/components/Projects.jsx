@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Projects = () => {
     const [reqProjectNo, setReqProjectNo] = useState('');
@@ -27,7 +28,9 @@ export const Projects = () => {
                 <input type="text" placeholder="Enter Project Number" name="Project Number" onChange={requestedProject} />
                 <input type="submit" value="Search" /><br />
             </form>
-            <button>New Project</button><br /><br />
+            <div>
+                <Link to="/NewProject"><button>Create New Project</button></Link><br /><br />
+            </div>
             <ul>
                 {
                     Object.keys(projectNumber).map(key => (
