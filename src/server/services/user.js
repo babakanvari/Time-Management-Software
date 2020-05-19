@@ -1,16 +1,16 @@
-const userDataAccess = require('../dataAccess/user');
+const dataAccess = require('../dataAccess/user');
 
 //Create new user
-export const create = async (userInfo) => {
-    return await userDataAccess.create(userInfo);
+export const create = async (user) => {
+    return await dataAccess.create(user);
 }
 
 //Find User information with unique email.
 export const find = async (userEmail) => {
-    return await userDataAccess.findByEmail(userEmail);
+    return await dataAccess.findByEmail(userEmail);
 }
 
 //Update user
 export const update = async (userInfo) => {
-    return await userDataAccess.update(userInfo);
+    return await dataAccess.update(userInfo);
 }

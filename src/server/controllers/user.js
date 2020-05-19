@@ -1,7 +1,9 @@
-let users = require('express').Router();
+let router = require('express').Router();
+import { User } from '../entities/user'
+import ash from '../middleware/asyncHandler';
 import * as services from '../services/user';
 
-users.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
     console.log('recieved get request');
     console.log(req.query);
     let email = req.query.email;
@@ -10,4 +12,10 @@ users.get('/', async (req, res) => {
     res.send(user);
 });
 
-module.exports = users;
+router.post('/', ash(async (req, res) => {
+    let user = new User(req.body);
+    user = await services.create(user);
+    res.send(user);
+}));
+
+module.exports = router;

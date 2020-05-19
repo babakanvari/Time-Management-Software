@@ -2,7 +2,7 @@
 let router = require('express').Router();
 
 //users router
-router.use('/users', require('./user'));
+router.use('/user', require('./user'));
 
 //projects router
 router.use('/project', require('./project'));
