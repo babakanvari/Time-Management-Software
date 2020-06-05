@@ -8,6 +8,7 @@ const UserModel = mongoose.model(
             required: true,
             unique: true
         },
+        password: String,
         firstName: String,
         lastName: String,
         currentPosition: String,

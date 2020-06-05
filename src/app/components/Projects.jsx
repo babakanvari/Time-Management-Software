@@ -29,7 +29,7 @@ export const Projects = () => {
                 <input type="submit" value="Search" /><br />
             </form>
             <div>
-                <Link to="/NewProject"><button>Create New Project</button></Link><br /><br />
+                <Link to="/newproject"><button>Create New Project</button></Link><br /><br />
             </div>
             <ul>
                 {

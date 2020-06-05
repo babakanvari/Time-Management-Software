@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router';
 import { Router, Route } from 'react-router-dom';
-
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
@@ -11,16 +10,19 @@ import { NewUser } from './NewUser';
 import { Navigation } from './Navigation';
 import { Projects } from './Projects';
 import { NewProject } from './NewProject';
+import { Login } from './Login';
+
 
 export const Main = () => (
     <Router history={history}>
         <div>
             <Navigation />
             <Switch>
-                <Route exact path='/Users'><Users /></Route>
-                <Route exact path='/NewUser'><NewUser /></Route>
-                <Route exact path='/Projects'><Projects /></Route>
-                <Route exact path='/NewProject'><NewProject /></Route>
+                <Route exact path='/user'><Users /></Route>
+                <Route exact path='/newuser'><NewUser /></Route>
+                <Route exact path='/project'><Projects /></Route>
+                <Route exact path='/newproject'><NewProject /></Route>
+                <Route exact path='/user/login'><Login /></Route>
             </Switch>
         </div>
     </Router>

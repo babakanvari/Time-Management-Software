@@ -1,8 +1,9 @@
 import React, { useState, Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { authHeader } from '../Services/authHeader';
 // import { response } from 'express';
-let url = "http://localhost:7777/users";
+let url = "http://localhost:7777/user";
 
 export const Users = () => {
     const [userEmail, setUserEmail] = useState('');
@@ -11,11 +12,11 @@ export const Users = () => {
     async function findUser(e) {
         e.preventDefault();
         try {
-            // let response = await axios.get(url+`/${userEmail}`);
-            let response = await axios.get(url, {
-                params: {
-                    email: userEmail
-                }
+            let response = await axios({
+                method: 'get',
+                url: url,
+                headers: authHeader(),
+                params: { email: userEmail }
             });
             if (!response.data) {
                 alert('user does not exist, please try different user ID');
@@ -31,7 +32,7 @@ export const Users = () => {
     return (
         <div>
             <div>
-                <Link to="/NewUser"><button>Create New User</button></Link><br /><br />
+                <Link to="/newuser"><button>Create New User</button></Link><br /><br />
             </div>
             <form onSubmit={findUser}>
                 <input type="text" placeholder="Enter user Email" name="userEmail" onChange={handleInputChange} /><br /><br />

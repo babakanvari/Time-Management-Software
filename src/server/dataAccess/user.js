@@ -7,7 +7,7 @@ const create = async userInfo => {
   connectdb();
   let user = new UserModel(userInfo);
   await user.save();
-  disConnectdb();
+  // disConnectdb();
 
   return user;
 }
@@ -16,8 +16,8 @@ const create = async userInfo => {
 const findByEmail = async userEmail => {
   connectdb();
   let userinfo = await UserModel.findOne({ email: userEmail });
-  let user = new User(userinfo);
-  disConnectdb();
+  let user = userinfo ? new User(userinfo) : null;
+  // disConnectdb();
 
   return user;
 }
@@ -35,8 +35,8 @@ const update = async userInfo => {
     },
     { new: true }
   )
-  disConnectdb();
-  
+  // disConnectdb();
+
   return user;
 }
 
