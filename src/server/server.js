@@ -1,16 +1,10 @@
 import express from 'express';
+import errorHandler from './middleware/errorHandler';
+import config from './config/config';
+
 let app = express();
-let router = require('./controllers/router');
-import error from './middleware/errorMiddleware';
 
-//setup app middlewares
-require('./middleware/appMiddleware')(app);
-
-//setup app routers
-app.use(router);
-
-//setup error handling middleware
-app.use(error);
-
-let port = 7777
-app.listen(port, console.log("Server listening on port ", port));
+require('./middleware/appMiddleware')(app); //setup app middlewares
+app.use(require('./controllers/router'));   //setup app routers
+app.use(errorHandler); //setup error handler
+app.listen(config.port, console.log("Server listening on port ", config.port));
