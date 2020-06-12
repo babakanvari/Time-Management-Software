@@ -3,6 +3,7 @@ var config = {
   test: 'testing',
   prod: 'production',
   port: process.env.PORT || 7777,
+  databaseURL: process.env.MONGODB_URI || `mongodb://localhost:27017/ERP`,
   secret: process.env.SECRET || 'BABAK'
 };
 

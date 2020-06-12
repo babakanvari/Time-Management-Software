@@ -1,0 +1,9 @@
+1-Move the database config file to the config folder. name it db.config.
+
+
+
+
+
+
+To be implemented
+1- Always check if the connection is closed before executing disconnet from database function.

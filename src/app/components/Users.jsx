@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { authHeader } from '../Services/authHeader';
 // import { response } from 'express';
-let url = "http://localhost:7777/user";
+let url = process.env.NODE_ENV == 'production' ? '' : 'http://localhost:7777/user';
 
 export const Users = () => {
     const [userEmail, setUserEmail] = useState('');
@@ -32,7 +32,7 @@ export const Users = () => {
     return (
         <div>
             <div>
-                <Link to="/newuser"><button>Create New User</button></Link><br /><br />
+                <Link to="/user/register"><button>Create New User</button></Link><br /><br />
             </div>
             <form onSubmit={findUser}>
                 <input type="text" placeholder="Enter user Email" name="userEmail" onChange={handleInputChange} /><br /><br />

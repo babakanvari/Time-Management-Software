@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-let url = "http://localhost:7777/project";
+const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777/project";
 
 export const NewProject = () => {
     const [newProject, setNewProject] = useState({});

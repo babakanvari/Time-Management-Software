@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-let url = "http://localhost:7777/user/register";
+const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777/user/register";
 
 export const NewUser = () => {
     const [user, setUser] = useState({});

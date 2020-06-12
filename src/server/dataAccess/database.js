@@ -1,5 +1,7 @@
+import config from '../config/config';
+
 const mongoose = require('mongoose');
-const databaseURL = `mongodb://localhost:27017/ERP`; //ERP is the name of database.
+const databaseURL = config.databaseURL; //ERP is the name of database.
 
 const connectdb = () => {
   mongoose
