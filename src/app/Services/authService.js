@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = 'http://localhost:7777/user/login';
+const url = process.env.NODE_ENV == 'production' ? '' : 'http://localhost:7777/user/login';
 
 export const login = async ({ email, password }) => {
     if (email && password) {

@@ -19,7 +19,7 @@ export const Main = () => (
             <Navigation />
             <Switch>
                 <Route exact path='/user'><Users /></Route>
-                <Route exact path='/newuser'><NewUser /></Route>
+                <Route exact path='/user/register'><NewUser /></Route>
                 <Route exact path='/project'><Projects /></Route>
                 <Route exact path='/newproject'><NewProject /></Route>
                 <Route exact path='/user/login'><Login /></Route>
