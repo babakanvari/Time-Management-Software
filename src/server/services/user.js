@@ -21,7 +21,7 @@ export const update = async (userInfo) => {
 
 //User login
 export const login = async (email, password) => {
-    let user = await find(email);
+    let user = await dataAccess.checkpassword(email);
     if (!user) throw new Error('User does not exist');
     let passwordIsValid = bcrypt.compareSync(password, user.password);
     if (!passwordIsValid) throw new Error('Invalid password');
