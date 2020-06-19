@@ -16,6 +16,7 @@ router.get('/', verifyToken, ash(async (req, res) => {
 
 router.post('/', ash(async (req, res) => {
     let user = new User(req.body);
+    user.password = req.body.password;
     user = await services.create(user);
     res.send(user);
 }));
