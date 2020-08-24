@@ -5,7 +5,6 @@ export const Login = () => {
     const [input, setInput] = useState({});
 
     async function signinRequest(e) {
-        e.preventDefault();
         login(input);
     }
 
@@ -15,16 +14,16 @@ export const Login = () => {
     }
 
     return (
-        <div>
-            <div>
+        <div class='card p-4 m-4'>
+            <div class='row justify-content-md-center'>
                 <h3>Sign in to your account</h3>
             </div>
-            <form onSubmit={signinRequest}>
+            <div class='container'>
                 <input type="text" placeholder="Enter user Email" name="email" onChange={handleInputChange} /><br /><br />
                 <input type="text" placeholder="Enter user password" name="password" onChange={handleInputChange} /><br /><br />
-                <input type="submit" value="Sign in" />
-            </form>
-            <input type="submit" value="Sign out" onClick={logout} />
+                <input type="submit" value="Sign in" onClick={signinRequest} class="btn btn-primary" /><br /><br />
+                <input type="submit" value="Sign out" onClick={logout} class="btn btn-primary" />
+            </div>
         </div>
     );
 }

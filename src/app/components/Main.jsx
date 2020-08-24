@@ -11,7 +11,7 @@ import { Navigation } from './Navigation';
 import { Projects } from './Projects';
 import { NewProject } from './NewProject';
 import { Login } from './Login';
-
+import { Timesheet } from './Timesheet';
 
 export const Main = () => (
     <Router history={history}>
@@ -21,8 +21,9 @@ export const Main = () => (
                 <Route exact path='/user'><Users /></Route>
                 <Route exact path='/user/register'><NewUser /></Route>
                 <Route exact path='/project'><Projects /></Route>
-                <Route exact path='/newproject'><NewProject /></Route>
+                <Route exact path='/project/new'><NewProject /></Route>
                 <Route exact path='/user/login'><Login /></Route>
+                <Route exact path='/timesheet'><Timesheet /></Route>
             </Switch>
         </div>
     </Router>

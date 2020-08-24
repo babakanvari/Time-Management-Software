@@ -1,9 +1,12 @@
 import { disConnectdb } from '../dataAccess/database';
 
 let error = (err, req, res, next) => {
-    console.log('Error handling midleware --------------->  ' + err);
+    // console.log('Error handling midleware --------------->  ' + err);
     disConnectdb();
-    res.status(err.status).send(err.message);
+    if (err.name = 'ValidationError') {
+        console.log(' ***************--------////-------->  ' + err);
+    }
+    err.status ? res.status(err.status).send(err.message) : res.send(err.message);
 }
 
 module.exports = error;

@@ -6,3 +6,12 @@ export const authHeader = () => {
         return {};
     }
 }
+
+export const userId = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.id) {
+        return (user.id);
+    } else {
+        return {};
+    }
+}

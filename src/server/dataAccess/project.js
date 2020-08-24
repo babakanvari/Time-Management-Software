@@ -1,16 +1,29 @@
 import ProjectModel from './models/project';
 import { connectdb, disConnectdb } from './database';
+import { Project } from '../entities/project';
+
 
 //Create new project
-const create = async (projectInfo) => {
+export const create = async (projectInfo) => {
     connectdb();
     let project = new ProjectModel(projectInfo);
     await project.save();
-    disConnectdb();
-
+    // disConnectdb();
     return (project);
 }
 
-module.exports = {
-    create
+//find project information by project number
+export const find = async (projectNumber) => {
+    connectdb();
+    // return await ProjectModel.findOne({ number: projectNumber });
+
+    let projectInfo = await ProjectModel.findOne({ number: projectNumber });
+    let project = projectInfo ? new Project(projectInfo) : null;
+    return project;
+}
+
+//Return list of all projects
+export const findAll = async () => {
+    connectdb();
+    return await ProjectModel.find({});
 }

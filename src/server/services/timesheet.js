@@ -1,11 +1,21 @@
 const { createTimesheet } = require('../dataAccess/timesheet');
+import * as dataAccess from '../dataAccess/timesheet';
 
-//Insert weeklyHours
-const insertWeeklyHours = async (weeklyHours) => {
-    let hours = await createTimesheet(weeklyHours);
-    console.log(hours);
+//Create timesheet
+export const create = async (weeklyHours) => {
+    console.log('timesheet-service-create');
+    return await dataAccess.create(weeklyHours);
 }
 
-//TODO
-//Find weeklyHours
-//Update weeklyHours
+//Find timesheet
+export const find = async (year, week, userId) => {
+    console.log('timesheet-service-find');
+    return await dataAccess.find(year, week, userId);
+}
+
+//Update timesheet
+export const update = async (weeklyHours) => {
+    console.log('timesheet-service-update');
+    return await dataAccess.update(weeklyHours);
+
+}

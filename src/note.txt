@@ -7,3 +7,10 @@
 
 To be implemented
 1- Always check if the connection is closed before executing disconnet from database function.
+
+
+[
+fix(user): hide password from client
+
+closes #8
+]

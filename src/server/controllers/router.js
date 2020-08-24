@@ -8,4 +8,6 @@ router.use('/user', require('./user'));
 router.use('/project', require('./project'));
 
 //weekly hours routers
+router.use('/timesheet', require('./timesheet'));
+
 module.exports = router;

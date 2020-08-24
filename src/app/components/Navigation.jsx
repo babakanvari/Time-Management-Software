@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 
 export const Navigation = () => (
     <div>
-        <ul>
-            <Link to='/'><li>Home</li></Link>
-            <Link to='/user/login'><li>Login</li></Link>
-            <Link to='/user'><li>Users</li></Link>
-            <Link to='/project'><li>Projects</li></Link>
-            <Link to='/'><li>Time Sheet</li></Link>
-        </ul>
+        <nav class="navbar navbar-light bg-light">
+
+            <Link to='/'><a>Home</a></Link>
+            <Link to='/user/login'><a>Login</a></Link>
+            <Link to='/user'><a>Users</a></Link>
+            <Link to='/project'><a>Projects</a></Link>
+            <Link to='/timesheet'><a>Timesheet</a></Link>
+        </nav>
     </div>
 );

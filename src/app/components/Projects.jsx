@@ -1,41 +1,45 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { authHeader } from '../Services/authHeader';
+
+
+const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777/project";
 
 export const Projects = () => {
-    const [reqProjectNo, setReqProjectNo] = useState('');
     const [projectNumber, setProjectNumber] = useState('');
+    const [project, setProject] = useState('');
 
-    const searchProject = (e) => {
+    const findProject = async (e) => {
         e.preventDefault();
-        const projectInfo = projectInformation.find((project) => (project.number === reqProjectNo));
-        console.log(projectInfo);
-        if (typeof projectInfo === "undefined") {
-            setProjectNumber("");
-            alert("Project Number Doesn't exist");
-        }
-        else {
-            setProjectNumber(projectInfo);
-        }
+        let response = await axios({
+            method: 'post',
+            url: url + '/find',
+            headers: authHeader(),
+            data: projectNumber
+        });
+        console.log(response.data);
+
     }
     //Function to update state containing project number.
-    const requestedProject = (e) => {
-        setReqProjectNo(e.target.value);
+    const handleInputChange = (e) => {
+        setProjectNumber(e.target.value);
     }
     return (
-        <div>
-            <h3>Project Information</h3>
-            <form onSubmit={searchProject}>
-                <input type="text" placeholder="Enter Project Number" name="Project Number" onChange={requestedProject} />
+        <div class='card p-4 m-4'>
+            <h4>Project Information</h4>
+            <form onSubmit={findProject}>
+                <input type="text" placeholder="Enter Project Number" name="Project Number" onChange={handleInputChange} />
                 <input type="submit" value="Search" /><br />
             </form>
             <div>
-                <Link to="/newproject"><button>Create New Project</button></Link><br /><br />
+                <Link to="/project/new"><button>Create New Project</button></Link><br /><br />
             </div>
             <ul>
                 {
-                    Object.keys(projectNumber).map(key => (
+                    Object.keys(project).map(key => (
                         <li>
-                            {(`${key} : ${projectNumber[key]}`)}
+                            {(`${key} : ${project[key]}`)}
                         </li>
                     ))
                 }

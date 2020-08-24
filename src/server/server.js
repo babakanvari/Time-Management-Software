@@ -7,9 +7,7 @@ let app = express();
 
 require('./middleware/appMiddleware')(app); //setup app middlewares
 app.use(require('./controllers/router'));   //setup app routers
-app.use(errorHandler); //setup error handler
-
-console.log(config.env);
+app.use(errorHandler);                      //setup error handler
 
 app.listen(config.port, console.log("Server listening on port ", config.port));
 
