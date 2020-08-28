@@ -3,3 +3,4 @@ node_modules*
 mock,
 Obsolete,
 src/note.txt
+dist/bundle.js
