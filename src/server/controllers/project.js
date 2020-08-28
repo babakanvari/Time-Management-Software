@@ -26,7 +26,7 @@ router.post('/find', verifyToken, ash(async (req, res, next) => {
 
 module.exports = router;
 
-let projectCsv = fs.readFile('./projects.csv')
-    .then((data) => neatCsv(data))
-    .then((data) => (data))
-    .catch((err) => (err))
+// let projectCsv = fs.readFile('./projects.csv')
+//     .then((data) => neatCsv(data))
+//     .then((data) => (data))
+//     .catch((err) => (err))
