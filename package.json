@@ -4,8 +4,8 @@
   "description": "A full stack application with React and MongoDB (Easily deployed)",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p",
-    "production": "PORT=8888 NODE_ENV=production npm run server-dev",
+    "build": "webpack -d --development",
+    "production": "PORT=8888 NODE_ENV='production' npm run server-dev",
     "deploy": "npm run build && git commit -a -m deployment && git push heroku master",
     "dev": "webpack-dev-server --open",
     "server-dev": "nodemon src/server/server.js --exec babel-node src/server",
@@ -47,7 +47,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.2",
     "uuid": "^3.3.2",
-    "webpack": "^4.17.2"
+    "webpack": "^4.44.1"
   },
   "engines": {
     "node": "9.2.0"
