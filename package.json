@@ -10,7 +10,7 @@
     "deploy": "npm run build && git commit -a -m deployment && git push heroku master",
     "dev": "webpack-dev-server --open",
     "server-dev": "nodemon src/server/server.js --exec babel-node src/server",
-    "start": "PORT=8888 NODE_ENV='production' npm run server",
+    "start": "npm run server",
     "server": "babel-node src/server/server",
     "populateDatabase": "babel-node src/server/populateDatabase",
     "test": "concurrently \"npm run server-dev\" \"npm run dev\""
