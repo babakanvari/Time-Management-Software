@@ -4,7 +4,7 @@
   "description": "A full stack application with React and MongoDB (Easily deployed)",
   "main": "index.js",
   "scripts": {
-    "build-development": "webpack -d --development",
+    "build-development": "webpack -d --development --env.NODE_ENV='production'",
     "build-production": "webpack -p",
     "production": "PORT=8888 NODE_ENV='production' npm run server-dev",
     "deploy": "npm run build && git commit -a -m deployment && git push heroku master",
