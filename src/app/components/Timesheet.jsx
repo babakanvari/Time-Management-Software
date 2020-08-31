@@ -62,10 +62,11 @@ export const Timesheet = () => {
                 userId: userId()
             }
         });
-        response.data.columns = defaultState.columns;
-        response.data.saved = true;
-        response.data.numberOfRows = response.data.data.length;
-        setState(response.data);
+        let serverResponse = { ...response.data };
+        serverResponse.columns = defaultState.columns;
+        serverResponse.saved = true;
+        serverResponse.numberOfRows = response.data.data.length;
+        setState(serverResponse);
     }
 
     const save = async (currentState) => {
