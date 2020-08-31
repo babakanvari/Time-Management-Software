@@ -3,7 +3,7 @@
 const path = require("path");
 // export default {
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: path.resolve(__dirname, 'src', 'app'),
     output: {
         path: path.resolve(__dirname, 'dist'),
