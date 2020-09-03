@@ -4,7 +4,7 @@ import { authHeader, userId } from '../Services/authHeader';
 import * as validate from '../Services/validationService';
 import MaterialTable from 'material-table';
 
-const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777/timesheet";
+const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777";
 
 export const Timesheet = () => {
     let defaultState = {
@@ -54,7 +54,7 @@ export const Timesheet = () => {
     const update = async () => {
         let response = await axios({
             method: 'get',
-            url: url + '/find',
+            url: url + '/timesheet/find',
             headers: authHeader(),
             params: {
                 year: state.year,
@@ -62,11 +62,10 @@ export const Timesheet = () => {
                 userId: userId()
             }
         });
-        let serverResponse = { ...response.data };
-        serverResponse.columns = defaultState.columns;
-        serverResponse.saved = true;
-        serverResponse.numberOfRows = response.data.data.length;
-        setState(serverResponse);
+        response.data.columns = defaultState.columns;
+        response.data.saved = true;
+        response.data.numberOfRows = response.data.data.length;
+        setState(response.data);
     }
 
     const save = async (currentState) => {
@@ -75,7 +74,7 @@ export const Timesheet = () => {
         try {
             let response = await axios({
                 method: 'post',
-                url: url + '/save',
+                url: url + '/timesheet/save',
                 headers: authHeader(),
                 data: timesheet
             });
