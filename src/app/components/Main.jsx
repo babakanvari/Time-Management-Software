@@ -4,7 +4,7 @@ import { Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
-// import {defaultState} from '../../server/defaultState';
+import { Home } from './Home';
 import { Users } from './Users';
 import { NewUser } from './NewUser';
 import { Navigation } from './Navigation';
@@ -18,6 +18,7 @@ export const Main = () => (
         <div>
             <Navigation />
             <Switch>
+                <Route exact path='/'><Home /></Route>
                 <Route exact path='/user'><Users /></Route>
                 <Route exact path='/user/register'><NewUser /></Route>
                 <Route exact path='/project'><Projects /></Route>

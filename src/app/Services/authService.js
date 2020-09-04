@@ -7,16 +7,17 @@ export const login = async ({ email, password }) => {
         let response = await axios.post(url, { email, password });
         if (response.data.accessToken) {
             localStorage.setItem("user", JSON.stringify(response.data));
+            alert('You Have Successfully Logged in');
         }
         console.log(response.data);
     }
     else {
-        alert('All fields should be field');
+        alert('All fields should be filled');
     }
 }
 
 export const logout = () => {
-    alert('Successfully loged out');
+    alert('You Have Successfully Logged Out');
     localStorage.removeItem("user");
 }
 

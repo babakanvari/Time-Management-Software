@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { authHeader } from '../Services/authHeader';
-// import { response } from 'express';
+
 let url = process.env.NODE_ENV == 'production' ? '' : 'http://localhost:7777/user';
 
 export const Users = () => {

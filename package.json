@@ -4,17 +4,13 @@
   "description": "A full stack application with React and MongoDB (Easily deployed)",
   "main": "index.js",
   "scripts": {
-    "build-development": "webpack -d --development --env.NODE_ENV='production",
-    "build-production": "webpack -p",
-    "build-production2": "webpack --env.production",
-    "production": "PORT=8888 NODE_ENV='production' npm run server-dev",
-    "deploy": "npm run build && git commit -a -m deployment && git push heroku master",
-    "dev": "webpack-dev-server --open",
-    "server-dev": "nodemon src/server/server.js --exec babel-node src/server",
-    "start": "npm run server",
-    "server": "babel-node src/server/server",
+    "server": "nodemon src/server/server.js --exec babel-node src/server",
+    "webpack": "webpack-dev-server --open",
+    "build": "webpack -p",
+    "deploy": "npm run build && git push heroku master",
     "populateDatabase": "babel-node src/server/populateDatabase",
-    "test": "concurrently \"npm run server-dev\" \"npm run dev\""
+    "production": "PORT=8888 NODE_ENV='production' npm run build && npm run server",
+    "start": "concurrently \"npm run server\" \"npm run webpack\""
   },
   "keywords": [
     "react",
@@ -58,6 +54,8 @@
     "babel-loader": "^8.0.2",
     "concurrently": "^4.0.1",
     "eslint-plugin-react-hooks": "^2.3.0",
+    "file-loader": "^6.1.0",
+    "image-webpack-loader": "^6.0.0",
     "mongodb": "^3.4.1",
     "nodemon": "^1.18.4",
     "webpack-cli": "^3.1.2",
