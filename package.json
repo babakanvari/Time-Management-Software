@@ -10,7 +10,8 @@
     "deploy": "npm run build && git push heroku master",
     "populateDatabase": "babel-node src/server/populateDatabase",
     "production": "PORT=8888 NODE_ENV='production' npm run build && npm run server",
-    "start": "concurrently \"npm run server\" \"npm run webpack\""
+    "development": "concurrently \"npm run server\" \"npm run webpack\"",
+    "start": "npm run server"
   },
   "keywords": [
     "react",
