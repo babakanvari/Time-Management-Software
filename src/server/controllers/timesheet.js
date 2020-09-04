@@ -17,6 +17,7 @@ router.get('/find', ash(async (req, res, next) => {
         timesheet.projects = projects;
         timesheet.data = [];
     }
+    console.log(timesheet);
     res.send(timesheet);
 }))
 
