@@ -24,7 +24,7 @@ export const Login = ({ user, setUser }) => {
             <div className='container'>
                 <input type="text" placeholder="Enter user Email" name="email" onChange={handleInputChange} /><br /><br />
                 <input type="text" placeholder="Enter user password" name="password" onChange={handleInputChange} /><br /><br />
-                <Link to='/' ><button className="btn btn-primary" onClick={signinRequest}>Sign in</button></Link>
+                <button className="btn btn-primary" onClick={signinRequest}>Sign in</button>
             </div>
         </div>
     );
