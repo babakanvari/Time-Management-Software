@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Logo from './resources/homePagePicture.png';
 
-// const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777/user/register";
-
-export const Home = () => {
-
+export const Home = ({ user }) => {
 
     return (
-        <div class='card p-4 m-4'>
-            <div class='container'>
-                <Link to="/user/login"><button class="btn btn-primary">Sign in</button></Link><br /><br />
-                <Link to="/user/register"><button class="btn btn-primary">Create account</button></Link>
-            </div>
-            <div>
-                <img src={Logo} alt="websote logo" height="600" mode="fit" />
-            </div>
+        <div className='card p-4 m-4'>
+
+            {(user === '') &&
+                <fieldset className='container'>
+                    <Link to="/user/login"><button className="btn btn-primary">Sign in</button></Link><br /><br />
+                    <Link to="/user/register"><button className="btn btn-primary">Create account</button></Link>
+                </fieldset>
+            }
+            {(user != '') &&
+                <p>Welcome {user.firstName}</p>
+            }
+
+            <img src={Logo} alt="websote logo" height="600" mode="fit" />
+
         </div>
-    )
+    );
 }

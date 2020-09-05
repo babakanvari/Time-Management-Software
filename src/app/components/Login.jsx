@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { login, logout } from '../Services/authService'
+import { login } from '../Services/authService';
+import { Link } from 'react-router-dom';
 
-export const Login = () => {
+
+export const Login = ({ user, setUser }) => {
     const [input, setInput] = useState({});
 
     async function signinRequest(e) {
-        login(input);
+        user = await login(input);
+        if (user != '') { setUser(user) };
     }
 
     const handleInputChange = (e) => {
@@ -14,15 +17,14 @@ export const Login = () => {
     }
 
     return (
-        <div class='card p-4 m-4'>
-            <div class='row justify-content-md-center'>
+        <div className='card p-4 m-4'>
+            <div className='row justify-content-md-center'>
                 <h3>Sign in to your account</h3>
             </div>
-            <div class='container'>
+            <div className='container'>
                 <input type="text" placeholder="Enter user Email" name="email" onChange={handleInputChange} /><br /><br />
                 <input type="text" placeholder="Enter user password" name="password" onChange={handleInputChange} /><br /><br />
-                <input type="submit" value="Sign in" onClick={signinRequest} class="btn btn-primary" /><br /><br />
-                <input type="submit" value="Sign out" onClick={logout} class="btn btn-primary" />
+                <Link to='/' ><button className="btn btn-primary" onClick={signinRequest}>Sign in</button></Link>
             </div>
         </div>
     );

@@ -23,7 +23,7 @@ export const NewProject = () => {
         setProject(project => ({ ...project, [name]: value }));
     }
     return (
-        <div class='card p-4 m-4'>
+        <div className='card p-4 m-4'>
             <h5>
                 Enter new project information.
             </h5>

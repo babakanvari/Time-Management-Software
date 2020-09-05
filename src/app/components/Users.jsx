@@ -30,7 +30,7 @@ export const Users = () => {
         }
     }
     return (
-        <div class='card p-4 m-4'>
+        <div className='card p-4 m-4'>
             <div>
                 <Link to="/user/register"><button>Create New User</button></Link><br /><br />
             </div>

@@ -26,7 +26,7 @@ export const Projects = () => {
         setProjectNumber(e.target.value);
     }
     return (
-        <div class='card p-4 m-4'>
+        <div className='card p-4 m-4'>
             <h4>Project Information</h4>
             <form onSubmit={findProject}>
                 <input type="text" placeholder="Enter Project Number" name="Project Number" onChange={handleInputChange} />

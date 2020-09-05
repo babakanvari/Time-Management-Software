@@ -142,7 +142,7 @@ export const Timesheet = () => {
         })
 
     return (
-        <div class='card p-4 m-4'>
+        <div className='card p-4 m-4'>
             <form>
                 <input type="text" placeholder="Year" name="year" onChange={handleInputChange} value={state.year} />
                 <input type="text" placeholder="Week Number" name="week" onChange={handleInputChange} value={state.week} />
