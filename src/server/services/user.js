@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import config from '../config/config';
 
-
 //Create new user
 export const create = async (user) => {
     return await dataAccess.create(user);
@@ -32,10 +31,18 @@ export const login = async (email, password) => {
 }
 
 //User Register
-export const register = async (user) => {
+export const register = async (req, res, next) => {
+    let user = req.body;
     let existingUser = await find(user.email);
-    if (existingUser) throw new Error('There is already a user with the same email');
+    if (existingUser) res.appError('There is already a user with the same email', 400);
     user.password = bcrypt.hashSync(user.password, 8);
-    user = await create(user);
-    return (user);
+    try {
+        user = await create(user);
+        return (user);
+    }
+    catch (err) {
+        err.status = 400;
+        console.log('<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>');
+        next(err);
+    }
 }

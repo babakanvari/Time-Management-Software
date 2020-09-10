@@ -151,7 +151,7 @@ export const Timesheet = () => {
             <div>
                 <div>
                     <br />
-                    <input type="submit" value="Save Timesheet" onClick={saveRequest} class='btn btn-primary mt-2' /><br />
+                    <input type="submit" value="Save Timesheet" onClick={saveRequest} className='btn btn-primary mt-2' /><br />
                 </div>
                 <MaterialTable
                     options={{

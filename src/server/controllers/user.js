@@ -4,7 +4,6 @@ import ash from '../middleware/asyncHandler';
 import * as services from '../services/user';
 import { verifyToken } from '../middleware/verifyToken';
 
-
 router.get('/', verifyToken, ash(async (req, res) => {
     console.log('recieved get request');
     console.log(req.query);
@@ -22,7 +21,7 @@ router.post('/', ash(async (req, res) => {
 }));
 
 router.post('/register', ash(async (req, res, next) => {
-    let user = await services.register(req.body);
+    let user = await services.register(req, res, next);
     res.status(200).send(user);
 }))
 

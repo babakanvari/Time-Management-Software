@@ -5,11 +5,6 @@ const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777/u
 
 export const NewUser = () => {
     const [user, setUser] = useState({});
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        let response = await axios.post(url, user);
-        console.log(response.data);
-    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -21,6 +16,23 @@ export const NewUser = () => {
             }
         }
         setUser(user => ({ ...user, [name]: value }));
+    }
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        if (user.email && user.firstName && user.lastName && user.password && user.currentPosition && user.employmentDate) {
+            try {
+                let response = await axios.post(url, user);
+                alert("User was successfully created.");
+                console.log(response);
+            }
+            catch (err) {
+                alert(err.response.data);
+            }
+        }
+        else {
+            alert('All fields are required.');
+        }
     }
 
     return (
