@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777/user/register";
 
-export const NewUser = () => {
+export const NewUser = ({ history }) => {
     const [user, setUser] = useState({});
 
     const handleInputChange = (e) => {
@@ -24,10 +24,11 @@ export const NewUser = () => {
             try {
                 let response = await axios.post(url, user);
                 alert("User was successfully created.");
-                console.log(response);
+                history.replace('/user/login');
+                console.log(response.user);
             }
             catch (err) {
-                alert(err.response.data);
+                if (err.response) { alert(err.response.data) };
             }
         }
         else {
