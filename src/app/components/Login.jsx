@@ -21,7 +21,7 @@ export const Login = ({ user, setUser, history }) => {
             {(user != '') && <h3 className='row justify-content-md-center'>Welcome {user.firstName}</h3>}
             <div className='container'>
                 <input type="text" placeholder="Enter user Email" name="email" onChange={handleInputChange} /><br /><br />
-                <input type="text" placeholder="Enter user password" name="password" onChange={handleInputChange} /><br /><br />
+                <input type="password" placeholder="Enter user password" name="password" onChange={handleInputChange} /><br /><br />
                 <button className="btn btn-primary" onClick={loginRequest}>Sign in</button>
             </div>
         </div>
