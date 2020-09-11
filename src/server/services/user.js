@@ -19,11 +19,12 @@ export const update = async (userInfo) => {
 }
 
 //User login
-export const login = async (email, password) => {
+export const login = async (req, res, next) => {
+    let { email, password } = req.body;
     let user = await dataAccess.checkpassword(email);
-    if (!user) throw new Error('User does not exist');
+    if (!user) res.appError('User does not exist', 401);
     let passwordIsValid = bcrypt.compareSync(password, user.password);
-    if (!passwordIsValid) throw new Error('Invalid password');
+    if (!passwordIsValid) res.appError('Invalid password', 401);
     let token = jwt.sign({ email: user.email }, config.secret, {
         expiresIn: 3 * 60 * 60 // 3 minutes
     });
@@ -42,7 +43,6 @@ export const register = async (req, res, next) => {
     }
     catch (err) {
         err.status = 400;
-        console.log('<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>');
         next(err);
     }
 }

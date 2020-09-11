@@ -9,10 +9,20 @@ export const Login = ({ user, setUser, history }) => {
         setInput(input => ({ ...input, [name]: value }));
     }
 
-    async function loginRequest(e) {
-        user = await login(input);
-        history.replace('/');
-        if (user != '') { setUser(user) };
+    const loginRequest = async () => {
+        if (input.email && input.password) {
+            try {
+                user = await login(input);
+                history.replace('/');
+                if (user != '') { setUser(user) };
+            }
+            catch (err) {
+                alert(err.response.data);
+            }
+        }
+        else {
+            alert('Please provide email and password');
+        }
     }
 
     return (

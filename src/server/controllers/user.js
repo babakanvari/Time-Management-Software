@@ -26,7 +26,7 @@ router.post('/register', ash(async (req, res, next) => {
 }))
 
 router.post('/login', ash(async (req, res, next) => {
-    let { user, token } = await services.login(req.body.email, req.body.password);
+    let { user, token } = await services.login(req, res, next);
     console.log(user);
     res.status(200).send({ id: user._id, firstName: user.firstName, accessToken: token });
 }))
