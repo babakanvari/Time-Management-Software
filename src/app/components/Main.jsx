@@ -27,7 +27,7 @@ export const Main = () => {
                     <Route exact path='/user/register'><NewUser /></Route>
                     <Route exact path='/project'><Projects /></Route>
                     <Route exact path='/project/new'><NewProject /></Route>
-                    <Route exact path='/user/login'><Login user={user} setUser={setUser} /></Route>
+                    <Route exact path='/user/login'><Login user={user} setUser={setUser} history={history} /></Route>
                     <Route exact path='/timesheet'><Timesheet /></Route>
                 </Switch>
             </div>

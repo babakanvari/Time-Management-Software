@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { login } from '../Services/authService';
 
-export const Login = ({ user, setUser }) => {
+export const Login = ({ user, setUser, history }) => {
     const [input, setInput] = useState({});
-
-    async function loginRequest(e) {
-        user = await login(input);
-        if (user != '') { setUser(user) };
-    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setInput(input => ({ ...input, [name]: value }));
+    }
+
+    async function loginRequest(e) {
+        user = await login(input);
+        history.replace('/');
+        if (user != '') { setUser(user) };
     }
 
     return (
