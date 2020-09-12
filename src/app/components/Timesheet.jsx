@@ -8,6 +8,8 @@ const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777";
 
 export const Timesheet = () => {
     let defaultState = {
+        year: new Date().getFullYear(),
+        week: 1,
         saved: true,
         numberOfRows: 5,
         userId: userId(),
