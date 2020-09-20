@@ -8,7 +8,7 @@ import * as projectServices from '../services/project';
 //Find timesheet
 router.get('/find', ash(async (req, res, next) => {
     let projects = await projectServices.findAll();
-    let timesheet = await services.find(req.query.year, req.query.week, req.query.userId);
+    let timesheet = await services.find(req.query.weekEnd, req.query.userId);
     if (timesheet) {
         timesheet.projects = projects;
     }
@@ -17,19 +17,21 @@ router.get('/find', ash(async (req, res, next) => {
         timesheet.projects = projects;
         timesheet.data = [];
     }
-    console.log(timesheet);
+    // console.log(timesheet);
     res.send(timesheet);
 }))
 
 //Save timesheet
 router.post('/save', ash(async (req, res, next) => {
-    let timesheet = await services.find(req.body.year, req.body.week, req.body.userId);
+    console.log(req.body.weekEnd);
+    let timesheet = await services.find(req.body.weekEnd, req.body.userId);
     if (timesheet) {
         let timesheet = await services.update(req.body);
         res.send(timesheet);
     }
     else {
         let timesheet = await services.create(req.body);
+        console.log(timesheet);
         res.send(timesheet);
     }
 }))

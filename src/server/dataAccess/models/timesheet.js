@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 
 let schema = new mongoose.Schema({
-    year: Number,
-    week: Number,
+    weekEnd: Date,
+    weekEnding: {
+        year: Number,
+        month: Number,
+        day: Number
+    },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "users"
     },
-    status: String,
     data: [
         {
             date: Date,
@@ -23,7 +26,7 @@ let schema = new mongoose.Schema({
     ]
 })
 
-schema.index({ 'year': 1, 'week': 1, 'userId': 1 }, { "unique": true });
+schema.index({ 'weekEnding': 1, 'userId': 1 }, { "unique": true });
 const TimesheetModel = mongoose.model("timesheets", schema);
 
 module.exports = TimesheetModel;

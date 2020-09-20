@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 import { authHeader, userId } from '../Services/authHeader';
 import * as validate from '../Services/validationService';
 import MaterialTable from 'material-table';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777";
 
 export const Timesheet = () => {
+
     let defaultState = {
         year: new Date().getFullYear(),
         week: 1,
+        weekEnd: new Date(),
         saved: true,
         numberOfRows: 5,
         userId: userId(),
@@ -27,47 +31,34 @@ export const Timesheet = () => {
 
     let [state, setState] = useState(defaultState);
 
-    const handleInputChange = (e) => {
-        let prevState = state;
-        const { name, value } = e.target;
-        state = { ...state, [name]: value };
-        if (prevState.year !== state.year || prevState.week !== state.week) {
-            if (state.saved == true) {
-                update();
-            }
-            else {
-                if (confirm('Do you want to save changes?')) {
-                    save(prevState);
-                }
-                else {
-                    update();
-                }
-            }
-        }
-        else {
-            setState(state);
-        }
+    const handleDateChange = (date) => {
+        state = { ...state, weekEnd: date };
+        updateTable();
     }
 
-    const saveRequest = () => {
-        save(state);
-    }
-
-    const update = async () => {
+    const updateTable = async () => {
         let response = await axios({
             method: 'get',
             url: url + '/timesheet/find',
             headers: authHeader(),
             params: {
-                year: state.year,
-                week: state.week,
+                weekEnd: state.weekEnd,
                 userId: userId()
             }
         });
         response.data.columns = defaultState.columns;
         response.data.saved = true;
         response.data.numberOfRows = response.data.data.length;
+        // response.data.weekEnd = new Date(response.data.weekEnd);
+        response.data.weekEnd = state.weekEnd;
         setState(response.data);
+    }
+
+    const handleInputChange = (e) => {
+    }
+
+    const saveRequest = () => {
+        save(state);
     }
 
     const save = async (currentState) => {
@@ -82,6 +73,10 @@ export const Timesheet = () => {
             });
             response.data.columns = defaultState.columns;
             response.data.saved = true;
+
+            console.log(response.data.weekEnd);
+            response.data.weekEnd = new Date(response.data.weekEnd);
+
             setState(response.data);
         }
         catch (err) {
@@ -142,14 +137,9 @@ export const Timesheet = () => {
                 });
             }, 600);
         })
-
     return (
         <div className='card p-4 m-4'>
-            <form>
-                <input type="text" placeholder="Year" name="year" onChange={handleInputChange} value={state.year} />
-                <input type="text" placeholder="Week Number" name="week" onChange={handleInputChange} value={state.week} />
-                <input type="text" placeholder="Status" name="status" onChange={handleInputChange} />
-            </form>
+            <DatePicker selected={state.weekEnd} onChange={handleDateChange} /><br /><br /><br />
             <div>
                 <div>
                     <br />

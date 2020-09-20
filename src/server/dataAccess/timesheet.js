@@ -14,11 +14,11 @@ export const create = async weeklyHours => {
 }
 
 //Find timesheet
-export const find = async (year, week, userId) => {
+export const find = async (weekEnding, userId) => {
   connectdb();
   console.log('timesheet-dataaccess-find');
   let timesheet = await TimesheetModel
-    .findOne({ year: year, week: week, userId: userId })
+    .findOne({ weekEnding: weekEnding, userId: userId })
     .populate('data.projectId', 'number');
   return (addProjectNumber(timesheet));
 }
@@ -27,9 +27,9 @@ export const find = async (year, week, userId) => {
 export const update = async weeklyHours => {
   connectdb();
   console.log('dataAccess');
-  let query = { year: weeklyHours.year, week: weeklyHours.week, userId: weeklyHours.userId }
+  let query = { weekEnding: weeklyHours.weekEnding, userId: weeklyHours.userId }
   await TimesheetModel.updateOne(query, { $set: { data: weeklyHours.data } });
-  return (find(weeklyHours.year, weeklyHours.week, weeklyHours.userId));
+  return (find(weeklyHours.weekEnding, weeklyHours.userId));
 }
 
 //Add porject number populated inside the project object into the higher level
