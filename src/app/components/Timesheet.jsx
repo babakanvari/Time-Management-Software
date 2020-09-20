@@ -11,8 +11,6 @@ const url = process.env.NODE_ENV == 'production' ? '' : "http://localhost:7777";
 export const Timesheet = () => {
 
     let defaultState = {
-        year: new Date().getFullYear(),
-        week: 1,
         weekEnd: new Date(),
         saved: true,
         numberOfRows: 5,
@@ -108,7 +106,7 @@ export const Timesheet = () => {
                     .finally(() => {
                         if (oldData) {
                             setState((prevState) => {
-                                const data = [...prevState.data];
+                                let data = [...prevState.data];
                                 data[data.indexOf(oldData)] = newData;
                                 return { ...prevState, data };
                             });
