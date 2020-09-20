@@ -46,24 +46,23 @@ export const Timesheet = () => {
                 userId: userId()
             }
         });
-        response.data.columns = defaultState.columns;
-        response.data.saved = true;
-        response.data.numberOfRows = response.data.data.length;
-        // response.data.weekEnd = new Date(response.data.weekEnd);
-        response.data.weekEnd = state.weekEnd;
-        setState(response.data);
+        response = response.data;
+        state = {
+            ...state,
+            saved: true,
+            data: response.data,
+            numberOfRows: response.data.length,
+            projects: response.projects
+        };
+        setState(state);
     }
 
-    const handleInputChange = (e) => {
-    }
-
-    const saveRequest = () => {
-        save(state);
-    }
-
-    const save = async (currentState) => {
-        let timesheet = currentState;
-        delete timesheet.columns;
+    const saveTable = async () => {
+        let timesheet = {
+            userId: state.userId,
+            weekEnd: state.weekEnd,
+            data: state.data
+        }
         try {
             let response = await axios({
                 method: 'post',
@@ -71,13 +70,6 @@ export const Timesheet = () => {
                 headers: authHeader(),
                 data: timesheet
             });
-            response.data.columns = defaultState.columns;
-            response.data.saved = true;
-
-            console.log(response.data.weekEnd);
-            response.data.weekEnd = new Date(response.data.weekEnd);
-
-            setState(response.data);
         }
         catch (err) {
             alert(err.message);
@@ -143,7 +135,7 @@ export const Timesheet = () => {
             <div>
                 <div>
                     <br />
-                    <input type="submit" value="Save Timesheet" onClick={saveRequest} className='btn btn-primary mt-2' /><br />
+                    <input type="submit" value="Save Timesheet" onClick={saveTable} className='btn btn-primary mt-2' /><br />
                 </div>
                 <MaterialTable
                     options={{

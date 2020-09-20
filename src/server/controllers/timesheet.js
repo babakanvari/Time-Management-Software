@@ -17,13 +17,12 @@ router.get('/find', ash(async (req, res, next) => {
         timesheet.projects = projects;
         timesheet.data = [];
     }
-    // console.log(timesheet);
     res.send(timesheet);
 }))
 
 //Save timesheet
 router.post('/save', ash(async (req, res, next) => {
-    console.log(req.body.weekEnd);
+    console.log(req.body);
     let timesheet = await services.find(req.body.weekEnd, req.body.userId);
     if (timesheet) {
         let timesheet = await services.update(req.body);
