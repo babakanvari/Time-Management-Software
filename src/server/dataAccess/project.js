@@ -15,8 +15,6 @@ export const create = async (projectInfo) => {
 //find project information by project number
 export const find = async (projectNumber) => {
     connectdb();
-    // return await ProjectModel.findOne({ number: projectNumber });
-
     let projectInfo = await ProjectModel.findOne({ number: projectNumber });
     let project = projectInfo ? new Project(projectInfo) : null;
     return project;
